@@ -234,6 +234,12 @@ if score >= 70 {
 
 ---
 
-## License
+## License & Commercial Use
 
-Business Source License 1.1 (BSL 1.1). See the [LICENSE](./LICENSE) file for details.
+The Seatling Golang SDK is licensed under the **Business Source License 1.1 (BSL 1.1)** with an **Additional Use Grant**. See [LICENSE](./LICENSE) for the full license text.
+
+- **Non-Production & Evaluation (Free)**: Free for local development, staging, benchmarks, and continuous integration.
+- **Production Use (Commercial Customers)**: Permitted under the BSL 1.1 **Additional Use Grant** for users or organizations with an active, valid commercial subscription or enterprise agreement with Seatling.
+- **Change Date**: Automatically converts to the **GNU General Public License v3.0 (GPLv3)** on **October 21, 2030** (or the fourth anniversary of distribution).
+
+For commercial licensing and enterprise agreements, visit [seatling.com](https://seatling.com).

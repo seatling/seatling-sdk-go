@@ -4,7 +4,7 @@ package seatling
 
 /*
 #cgo CFLAGS: -I${SRCDIR}/include
-#cgo LDFLAGS: -L${SRCDIR}/lib/windows_amd64 -lseatling -lws2_32 -luserenv -lbcrypt -lcrypt32 -ladvapi32 -lntdll
+#cgo LDFLAGS: -L${SRCDIR}/lib/windows_amd64 -lseatling -lws2_32 -luserenv -lbcrypt -lcrypt32 -ladvapi32 -lntdll -lsynchronization
 #include "seatling.h"
 */
 import "C"

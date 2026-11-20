@@ -111,6 +111,20 @@ func TestConfigValidation(t *testing.T) {
 			t.Fatalf("expected error for invalid APIBaseURL %q", badURL)
 		}
 	}
+
+	// Invalid UTF-8 bytes in WorkspaceID must fail closed across CGO boundary
+	cfg = validTestConfig()
+	cfg.WorkspaceID = "ws_" + string([]byte{0xff, 0xfe})
+	if _, err := seatling.New(cfg); err == nil {
+		t.Fatal("expected error for invalid UTF-8 in WorkspaceID")
+	}
+
+	// Embedded control characters in APIBaseURL must fail
+	cfg = validTestConfig()
+	cfg.APIBaseURL = "https://api.seatling.com/v1\n/evil"
+	if _, err := seatling.New(cfg); err == nil {
+		t.Fatal("expected error for embedded control character in APIBaseURL")
+	}
 }
 
 func TestHWID(t *testing.T) {

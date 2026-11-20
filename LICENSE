@@ -3,9 +3,15 @@ Business Source License 1.1
 Parameters:
 
 Licensor:             Stefan Pfaffel
-Change Date:          2030-10-21
+Change Date:          2030-11-20
 Change License:       GNU General Public License v3.0 (GPLv3) 
-Additional Use Grant: None
+Additional Use Grant: Production use of the Licensed Work is permitted
+                      exclusively for users or organizations with an active,
+                      valid commercial subscription, enterprise agreement, or
+                      written commercial license granted by Licensor or
+                      authorized resellers. All production rights automatically
+                      terminate if the commercial subscription or agreement
+                      lapses or terminates.
 
 License text copyright © 2017 MariaDB Corporation Ab, All Rights Reserved.
 "Business Source License" is a trademark of MariaDB Corporation Ab.
