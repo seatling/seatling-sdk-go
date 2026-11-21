@@ -223,6 +223,10 @@ func New(cfg Config) (*Client, error) {
 		return nil, errors.New("seatling: failed to construct native SeatlingClient (invalid configuration or keys)")
 	}
 
+	cSDKName := C.CString("go")
+	defer C.free(unsafe.Pointer(cSDKName))
+	C.seatling_client_set_sdk_name(rawPtr, cSDKName)
+
 	c := &Client{
 		rawClient: rawPtr,
 		drainCh:   make(chan struct{}),

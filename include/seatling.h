@@ -45,6 +45,7 @@ typedef struct seatling_config_t {
 typedef struct SeatlingClient SeatlingClient;
 
 SeatlingClient* seatling_client_new(const seatling_config_t* config);
+void seatling_client_set_sdk_name(SeatlingClient* client, const char* sdk_name);
 seatling_status_code_t seatling_client_initialize(SeatlingClient* client);
 bool seatling_client_is_authorized(const SeatlingClient* client);
 bool seatling_client_is_valid(const SeatlingClient* client);
