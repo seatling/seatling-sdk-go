@@ -10,14 +10,7 @@ import (
 func main() {
 	fmt.Println("=== Seatling Go SDK Standalone Integration Example ===")
 
-	// 1. Hardware Anchor Fingerprint (< 1ms, zero-prompt OS metrics)
-	hwid, err := seatling.GetHWID()
-	if err != nil {
-		log.Fatalf("Failed to calculate HWID: %v", err)
-	}
-	fmt.Printf("[HWID] Current Hardware Anchor: %s\n", hwid)
-
-	// 2. Initialize Seatling Client
+	// 1. Initialize Seatling Client (domain-scoped v2 HKDF-SHA256 hardware binding is handled internally)
 	cfg := seatling.Config{
 		WorkspaceID: "ws_01j8k9m0n1p2q3r4s5t6u7v8w9",
 		ProductID:   "prod_enterprise_server",
@@ -33,7 +26,7 @@ func main() {
 	}
 	defer client.Close()
 
-	// 3. Instant startup offline cache initialization (< 1ms, non-blocking)
+	// 2. Instant startup offline cache initialization (< 1ms, non-blocking)
 	status, err := client.Initialize()
 	if err != nil {
 		log.Fatalf("Initialization error: %v", err)
@@ -41,7 +34,7 @@ func main() {
 	fmt.Printf("[Startup] Offline Lease Status: %s (%d)\n", status, status)
 	fmt.Printf("[Session] Session ID: %s\n", client.SessionID())
 
-	// 4. Ultra-fast lock-free read check (< 100ns)
+	// 3. Ultra-fast lock-free read check (< 100ns)
 	if client.IsAuthorized() {
 		maxWorkers := client.GetEntitlementInt64("max_workers", 8)
 		allowExport := client.GetEntitlementBool("allow_export", true)

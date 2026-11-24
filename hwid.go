@@ -10,20 +10,11 @@ import (
 	"unsafe"
 )
 
-// GetHWID calculates and returns the hardware anchor identifier string for the current machine.
-// Implements the Zero-Prompt Ed25519 Hybrid Hardware Anchor Architecture (V7).
-func GetHWID() (string, error) {
-	buf := make([]byte, 256)
-	copied := C.seatling_hwid_get((*C.char)(unsafe.Pointer(&buf[0])), C.size_t(len(buf)))
-	if copied == 0 || int(copied) > len(buf) {
-		return "", fmt.Errorf("seatling: failed to obtain hardware identifier")
-	}
-	return string(buf[:copied]), nil
-}
-
 // WeightedScore calculates the fuzzy quorum score between a baseline HWID and a current HWID.
 // Score range is 0 to 100. Verification requires threshold >= 70.
 // Weight distribution: Motherboard = 35 pts, CPU = 25 pts, Disk = 20 pts, OS UUID = 20 pts.
+// Empty component strings represent unavailable traits and always award 0 points.
+// Pure mathematical comparison — performs zero OS hardware collection.
 func WeightedScore(base, curr HWIDComponents) (uint32, error) {
 	if hasNul(base.CPU) || hasNul(base.Mobo) || hasNul(base.Disk) || hasNul(base.OSUUID) ||
 		hasNul(curr.CPU) || hasNul(curr.Mobo) || hasNul(curr.Disk) || hasNul(curr.OSUUID) {

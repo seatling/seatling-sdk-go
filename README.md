@@ -198,20 +198,13 @@ func main() {
 
 ---
 
-## Hardware Fingerprinting & Quorum
+## Hardware Anchor & Quorum
 
-The SDK implements the **Zero-Prompt Ed25519 Hybrid Hardware Anchor Architecture (V7)**:
+The SDK implements the **Zero-Prompt Ed25519 Hybrid Hardware Anchor Architecture (V7)** with **v2 domain-scoped HKDF-SHA256 HWID pseudonymisation**. Hardware fingerprinting is strictly encapsulated inside `seatling.Client` (no public `GetHWID()` fingerprinting API is exported, per GDPR Art. 25(2) Privacy by Default).
 
 ```go
-// Derive authoritative composite hardware anchor (< 1ms, zero OS elevation dialogs)
-hwid, err := seatling.GetHWID()
-if err != nil {
-    log.Fatalf("Failed to get HWID: %v", err)
-}
-fmt.Println("Machine HWID Fingerprint:", hwid)
-
-// Evaluate hardware changes using weighted fuzzy quorum scoring (0 to 100)
-// Verification threshold >= 70 (Motherboard = 35 pts, CPU = 25 pts, Disk = 20 pts, OS UUID = 20 pts)
+// Pure quorum scoring helper (0 to 100; threshold >= 70)
+// Weight distribution: Motherboard = 35 pts, CPU = 25 pts, Disk = 20 pts, OS UUID = 20 pts
 score, err := seatling.WeightedScore(baselineComponents, currentComponents)
 if err != nil {
     log.Fatal(err)

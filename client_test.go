@@ -127,15 +127,7 @@ func TestConfigValidation(t *testing.T) {
 	}
 }
 
-func TestHWID(t *testing.T) {
-	hwid, err := seatling.GetHWID()
-	if err != nil {
-		t.Fatalf("failed to get HWID: %v", err)
-	}
-	if len(hwid) == 0 {
-		t.Fatal("expected non-empty HWID string")
-	}
-
+func TestWeightedScore(t *testing.T) {
 	base := seatling.HWIDComponents{
 		CPU:    "cpu-model-intel-1",
 		Mobo:   "mobo-serial-asus-1",
@@ -172,6 +164,19 @@ func TestHWID(t *testing.T) {
 	}
 	if score != 65 {
 		t.Fatalf("expected score 65 for mobo swap, got %d", score)
+	}
+
+	// Unavailable (empty) mobo and os_uuid award 0 pts -> cpu(25) + disk(20) = 45 < 70
+	partialHost := seatling.HWIDComponents{
+		CPU:  base.CPU,
+		Disk: base.Disk,
+	}
+	score, err = seatling.WeightedScore(partialHost, partialHost)
+	if err != nil {
+		t.Fatalf("WeightedScore failed for partial components: %v", err)
+	}
+	if score != 45 {
+		t.Fatalf("expected score 45 when mobo and os_uuid are unavailable, got %d", score)
 	}
 
 	// Embedded NUL byte in HWID component must fail

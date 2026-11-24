@@ -87,7 +87,6 @@ bool seatling_client_deactivate_detailed(
     bool force
 );
 void seatling_client_free(SeatlingClient* client);
-size_t seatling_hwid_get(char* buffer, size_t buffer_len);
 uint32_t seatling_hwid_weighted_score(
     const char* base_cpu,
     const char* base_mobo,
