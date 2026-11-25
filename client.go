@@ -158,7 +158,7 @@ func New(cfg Config) (*Client, error) {
 
 	apiURLStr := cfg.APIBaseURL
 	if apiURLStr == "" {
-		apiURLStr = "https://api.seatling.com"
+		apiURLStr = "https://www.seatling.app/api"
 	}
 	validatedURL, err := validateAPIBaseURL(apiURLStr)
 	if err != nil {

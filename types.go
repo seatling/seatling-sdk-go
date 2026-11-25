@@ -74,7 +74,7 @@ type Config struct {
 	// AppVersion is the semantic version string of the host application (defaults to "1.0.0").
 	AppVersion string
 
-	// APIBaseURL is the authoritative Seatling licensing API URL (defaults to "https://api.seatling.com").
+	// APIBaseURL is the authoritative Seatling licensing API URL (defaults to "https://www.seatling.app/api").
 	APIBaseURL string
 
 	// HeartbeatIntervalSeconds is the background heartbeat interval (defaults to 14400 / 4 hours).

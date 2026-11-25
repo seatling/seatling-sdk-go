@@ -21,7 +21,7 @@ The Seatling Go SDK uses **monolithic static linking via CGO** (`libseatling.a`)
 ## Installation
 
 ```bash
-go get github.com/seatling/seatling-sdk-go
+go get github.com/seatling/seatling-sdk-go/v2
 ```
 
 ---
@@ -149,7 +149,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/seatling/seatling-sdk-go"
+	"github.com/seatling/seatling-sdk-go/v2"
 )
 
 func main() {
@@ -233,6 +233,6 @@ The Seatling Golang SDK is licensed under the **Business Source License 1.1 (BSL
 
 - **Non-Production & Evaluation (Free)**: Free for local development, staging, benchmarks, and continuous integration.
 - **Production Use (Commercial Customers)**: Permitted under the BSL 1.1 **Additional Use Grant** for users or organizations with an active, valid commercial subscription or enterprise agreement with Seatling.
-- **Change Date**: Automatically converts to the **GNU General Public License v3.0 (GPLv3)** on **October 21, 2030** (or the fourth anniversary of distribution).
+- **Change Date**: Automatically converts to the **GNU General Public License v3.0 (GPLv3)** on the fourth anniversary of the release distribution.
 
-For commercial licensing and enterprise agreements, visit [seatling.com](https://seatling.com).
+For commercial licensing and enterprise agreements, visit [seatling.app](https://www.seatling.app).

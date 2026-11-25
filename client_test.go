@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/seatling/seatling-sdk-go"
+	"github.com/seatling/seatling-sdk-go/v2"
 )
 
 const (
@@ -24,7 +24,7 @@ func validTestConfig() seatling.Config {
 			testKeyID: testPubKeyB64,
 		},
 		AppVersion:               "1.2.3",
-		APIBaseURL:               "https://api.seatling.com",
+		APIBaseURL:               "https://www.seatling.app/api",
 		HeartbeatIntervalSeconds: 3600,
 	}
 }
@@ -93,17 +93,17 @@ func TestConfigValidation(t *testing.T) {
 
 	// Cleartext HTTP non-loopback APIBaseURL must fail
 	cfg = validTestConfig()
-	cfg.APIBaseURL = "http://api.seatling.com"
+	cfg.APIBaseURL = "http://www.seatling.app/api"
 	if _, err := seatling.New(cfg); err == nil {
 		t.Fatal("expected error for non-loopback http:// APIBaseURL")
 	}
 
 	// Query / fragment / userinfo injection in APIBaseURL must fail
 	for _, badURL := range []string{
-		"https://api.seatling.com?leak=1",
-		"https://api.seatling.com#frag",
-		"https://user@api.seatling.com",
-		"https://api.seatling.com/../evil",
+		"https://www.seatling.app/api?leak=1",
+		"https://www.seatling.app/api#frag",
+		"https://user@www.seatling.app/api",
+		"https://www.seatling.app/api/../evil",
 	} {
 		cfg = validTestConfig()
 		cfg.APIBaseURL = badURL
@@ -121,7 +121,7 @@ func TestConfigValidation(t *testing.T) {
 
 	// Embedded control characters in APIBaseURL must fail
 	cfg = validTestConfig()
-	cfg.APIBaseURL = "https://api.seatling.com/v1\n/evil"
+	cfg.APIBaseURL = "https://www.seatling.app/api/v1\n/evil"
 	if _, err := seatling.New(cfg); err == nil {
 		t.Fatal("expected error for embedded control character in APIBaseURL")
 	}

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/seatling/seatling-sdk-go"
+	"github.com/seatling/seatling-sdk-go/v2"
 )
 
 func main() {
